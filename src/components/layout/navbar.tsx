@@ -8,9 +8,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <nav className="w-full sticky top-0 z-50 h-[48px] md:h-[55px] flex justify-between items-center bg-none backdrop-blur-lg border-b px-7">
-      <Link to="/">
-        <Logo withText />
-      </Link>
+      <Logo withText />
       <div className="flex justify-start items-center gap-10">
         <ul className="hidden md:flex justify-start items-center gap-5">
           {NavbarList.map((item) => (

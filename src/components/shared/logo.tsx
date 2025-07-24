@@ -1,4 +1,5 @@
 import { cn } from "@/lib//utils";
+import { Link } from "@tanstack/react-router";
 
 interface LogoProps {
   withText?: boolean;
@@ -9,18 +10,21 @@ interface LogoProps {
 const Logo = ({ withText = false, imgClassName, className }: LogoProps) => {
   if (!withText) {
     return (
-      <div className={cn("flex justify-start items-center gap-1", className)}>
+      <Link
+        to="/"
+        className={cn("flex justify-start items-center gap-1", className)}
+      >
         <img
           src="/assets/logo.svg"
           alt="LOGO"
           className={cn("size-5", imgClassName)}
         />
-      </div>
+      </Link>
     );
   }
 
   return (
-    <div>
+    <Link to="/">
       <div
         className={cn(
           "flex justify-start items-center -translate-x-1",
@@ -36,7 +40,7 @@ const Logo = ({ withText = false, imgClassName, className }: LogoProps) => {
           artifact
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 
