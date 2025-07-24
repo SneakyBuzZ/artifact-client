@@ -12,6 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useLogin } from "@/lib/api";
+import Spinner from "@/components/shared/spinner";
 
 const formSchema = z.object({
   email: z.email().min(4, "Email is required"),
@@ -19,6 +21,8 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const { mutateAsync: login, isPending } = useLogin();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,8 +31,12 @@ export default function LoginForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log("Form submitted:", data);
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    await login({
+      email: data.email,
+      password: data.password,
+    });
+    form.reset();
   }
 
   return (
@@ -67,8 +75,8 @@ export default function LoginForm() {
           <Button variant={"link"} className="px-1 py-0 h-3">
             Forgot password?
           </Button>
-          <Button type="submit" className="w-full mt-2">
-            Login
+          <Button type="submit" className="w-full mt-2" disabled={isPending}>
+            {isPending ? <Spinner /> : <>Login</>}
           </Button>
         </div>
       </form>

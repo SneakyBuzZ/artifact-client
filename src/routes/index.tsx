@@ -1,9 +1,13 @@
 import Navbar from "@/components/layout/navbar";
 import Hero from "@/components/sections/hero";
 import { Button } from "@/components/ui/button";
+import { getUser } from "@/lib/api";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
+  beforeLoad: async () => {
+    return await getUser();
+  },
   component: RouteIndex,
 });
 

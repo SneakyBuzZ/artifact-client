@@ -1,9 +1,17 @@
 import AuthContent from "@/components/layout/auth/auth-content";
 import Logo from "@/components/shared/logo";
+import { isAuthenticated } from "@/lib/api";
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/auth")({
-  beforeLoad: ({ location }) => {
+  beforeLoad: async ({ location }) => {
+    // CHECK IF USER IS AUTHENTICATED
+    const authenticated = await isAuthenticated();
+    if (authenticated) {
+      throw redirect({ to: "/" });
+    }
+
+    // IF USER IS NOT AUTHENTICATED AND ON AUTH PAGE, REDIRECT TO LOGIN
     if (location.pathname === "/auth") {
       throw redirect({ to: "/auth/login" });
     }
