@@ -1,12 +1,15 @@
 import Navbar from "@/components/layout/navbar";
-import Hero from "@/components/sections/hero";
+import Hero from "@/components/sections/home/hero";
 import { Button } from "@/components/ui/button";
-import { getUser } from "@/lib/api";
+import { getUser, isAuthenticated } from "@/lib/api";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   beforeLoad: async () => {
-    return await getUser();
+    const response = await isAuthenticated();
+    if (response) {
+      await getUser();
+    }
   },
   component: RouteIndex,
 });
@@ -15,7 +18,7 @@ function RouteIndex() {
   return (
     <section className="w-full">
       <Navbar />
-      <main className="flex w-full flex-col items-center justify-center px-6">
+      <main className="flex w-full flex-col items-center justify-center">
         <Hero />
         <div className="flex w-full justify-center items-center gap-2 py-5 overflow-x-auto scroll-bar-hidden">
           <Button variant={"outline"}>Abstract</Button>

@@ -26,3 +26,4 @@ oauth.json
 *.sw?
 
 .env*
+verify.html

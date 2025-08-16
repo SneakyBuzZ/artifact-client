@@ -4,13 +4,13 @@ import Logo from "@/components/shared/logo";
 import { ShoppingCartIcon, TextOutdentIcon } from "@phosphor-icons/react";
 import { NavbarList } from "@/lib/lists";
 import useAuth from "@/lib/stores/auth-store";
-import UserAvatar from "../shared/user-avatar";
+import { AccountSheet } from "./sheet/account-sheet";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   return (
-    <nav className="w-full sticky top-0 z-50 h-[48px] md:h-[55px] flex justify-between items-center bg-none backdrop-blur-lg border-b px-7">
+    <nav className="w-full sticky top-0 z-50 h-[48px] md:h-[55px] flex justify-between items-center bg-none backdrop-blur-lg border-b px-16">
       <Logo withText />
       <div className="flex justify-start items-center gap-10">
         <ul className="hidden md:flex justify-start items-center gap-5">
@@ -25,8 +25,8 @@ const Navbar = () => {
           ))}
         </ul>
         {isAuthenticated ? (
-          <div className="hidden md:flex justify-start items-center gap-3">
-            <UserAvatar />
+          <div className="hidden md:flex justify-start items-center gap-5">
+            <AccountSheet />
             <ShoppingCartIcon className="size-5 cursor-pointer" />
           </div>
         ) : (

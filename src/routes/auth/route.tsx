@@ -22,7 +22,7 @@ export const Route = createFileRoute("/auth")({
 function AuthLayout() {
   return (
     <section className="w-full h-screen relative flex flex-col justify-center items-center gap-3">
-      <Logo withText className="absolute top-5 left-7" />
+      <Logo withText className="absolute top-4 left-4" />
       <main className="flex flex-col items-center justify-center w-full -translate-y-6">
         <AuthContent />
         <Outlet />

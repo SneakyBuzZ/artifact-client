@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useLogin } from "@/lib/api";
 import Spinner from "@/components/shared/spinner";
+import { useNavigate } from "@tanstack/react-router";
 
 const formSchema = z.object({
   email: z.email().min(4, "Email is required"),
@@ -22,6 +23,7 @@ const formSchema = z.object({
 
 export default function LoginForm() {
   const { mutateAsync: login, isPending } = useLogin();
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,6 +38,7 @@ export default function LoginForm() {
       email: data.email,
       password: data.password,
     });
+    navigate({ to: "/onboard" });
     form.reset();
   }
 

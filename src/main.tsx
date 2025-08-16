@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 // Import the generated route tree
 import { routeTree } from "@/routeTree.gen";
 import QueryProvider from "@/lib/providers/query-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -23,6 +24,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryProvider>
       <RouterProvider router={router} />
+      <Toaster />
     </QueryProvider>
   );
 }

@@ -120,17 +120,27 @@
   }
 
   body {
-    @apply bg-amber-50/80 font-sans antialiased;
+    @apply bg-amber-50/30 font-sans antialiased;
   }
 }
 
 .gradient-text {
-  background: url('/assets/gradient.png') no-repeat center center;
+  background: url('/assets/gradient-text.png') no-repeat center center;
   background-size: cover;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
   background-clip: text;
+}
+
+.gradient-bg {
+  background: url('/assets/gradient-bg.png') no-repeat center center;
+  background-size: cover;
+}
+
+.gradient-bg-2 {
+  background: url('/assets/gradient.svg') no-repeat center center;
+  background-size: cover;
 }
 
 .scroll-bar-hidden {

@@ -12,6 +12,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRegister } from "@/lib/api";
+import { useNavigate } from "@tanstack/react-router";
+import Spinner from "../shared/spinner";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -21,6 +24,8 @@ const formSchema = z.object({
 });
 
 export default function RegisterForm() {
+  const { mutateAsync: register, isPending } = useRegister();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,8 +36,10 @@ export default function RegisterForm() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log("Form submitted:", data);
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    await register(data);
+    navigate({ to: "/auth/login" });
+    form.reset();
   }
 
   return (
@@ -96,7 +103,13 @@ export default function RegisterForm() {
           )}
         />
         <Button type="submit" className="w-full mt-2">
-          Register
+          {isPending ? (
+            <>
+              <Spinner /> Loading
+            </>
+          ) : (
+            "Register"
+          )}
         </Button>
       </form>
     </Form>
